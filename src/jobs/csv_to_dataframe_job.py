@@ -3,8 +3,8 @@ import json
 from pyspark.sql.functions import regexp_replace, from_json, col, to_timestamp
 
 from dependencies.spark import spark_env
-from dependencies.sparkInstrumentedJob import read_csv, load_data
-from jobs.schema import schema_json
+from dependencies.utils import read_csv, load_data
+from dependencies.schema import schema_json
 
 
 
@@ -65,7 +65,7 @@ def transform_dataframe (input_data):
     transformed_df2 = ( transformed_df1.withColumn("JSON", from_json(transformed_df1["JSON"],schema_json))
                             .select("*",col("JSON.*"))
                             .drop("JSON"))
-    #CLEAN columns
+    # CLEAN columns
     transformed_df3 = transformed_df2.withColumn("CLI_COEFF", regexp_replace(input_data["CLI_COEFF"], ",","."))
     transformed_df4 = transformed_df3.withColumn("CLI_TEL", regexp_replace(transformed_df3["CLI_TEL"], "[/.]",""))
 
@@ -87,16 +87,18 @@ def transform_dataframe (input_data):
 def main() :
     # start Spark application and get Spark session, logger and config
     spark, log, config = spark_env(
-    app_name='csv_to_dataframe_job',
-    files=['conf/configs.json'])
-    exercice="exercice1"
+    app_name = 'csv_to_dataframe_job',
+    files = ['conf/configs.json'])
+    exercice = "exercice1"
+    path = config["path_raw_data_folder"] + "/" + config["input_file_csv"]
 
     # log that main ETL job is starting
     log.warn('csv_to_dataframe_job is up-and-running')
 
 
     # execute ETL pipeline
-    data = read_csv(spark,config)
+    
+    data = read_csv(spark, path)
     data_transformed = transform_dataframe(data)
     load_data(data_transformed,config,exercice)
 
