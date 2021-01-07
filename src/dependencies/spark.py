@@ -56,7 +56,13 @@ def spark_env(app_name='my_spark_app', master='local[*]', jar_packages=[],
             SparkSession
             .builder
             .appName(app_name))
+        
+        spark_jars_packages = ','.join(list(jar_packages))
+
+        spark_builder.config('spark.jars.packages', spark_jars_packages)
+
     else:
+
         # get Spark session factory
         spark_builder = (
             SparkSession
@@ -66,6 +72,7 @@ def spark_env(app_name='my_spark_app', master='local[*]', jar_packages=[],
 
         # create Spark JAR packages string
         spark_jars_packages = ','.join(list(jar_packages))
+
         spark_builder.config('spark.jars.packages', spark_jars_packages)
 
         spark_files = ','.join(list(files))
@@ -77,7 +84,9 @@ def spark_env(app_name='my_spark_app', master='local[*]', jar_packages=[],
 
     # create session and retrieve Spark logger object
     spark_sess = spark_builder.getOrCreate()
+
     spark_logger = logging.Log4j(spark_sess)
+    spark_jars_packages = ','.join(list(jar_packages))
 
     # get config file if sent to cluster with --files
     spark_files_dir = SparkFiles.getRootDirectory()

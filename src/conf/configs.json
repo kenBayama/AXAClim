@@ -1,8 +1,8 @@
 {
     "input_file_csv" : "01_csv_to_dataframe.csv",
     "input_file_parquet" : "02_campagne.parquet",
+    "input_file_parquet2" : "exercice2",
     "path_raw_data_folder" : "src/data/raw",
-    "path_preprocessed_data_folder" : "src/data/preprocessed",
     "path_processed_data_folder" : "src/data/processed"
 
 
