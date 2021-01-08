@@ -62,7 +62,7 @@ spark = 2.4.7
             spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip .\src\jobs\csv_to_dataframe_job.py
 
 
-***Execice 1 : *** :
+***Execice1:*** :
 
 The data is loaded from the src/data/raw folder
 
@@ -96,7 +96,7 @@ The result are stored in **the src/data/processed/exercice1 folder** in avro for
             spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\count_client_contract_job.py
 
 
-***Exercice2 : ***
+***Exercice2:***
 
 The data is loaded from the src/data/raw folder
 
@@ -132,7 +132,7 @@ The result are stored in **the src/data/processed/exercice2 folder** in avro for
             spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\top_client_per_portofolio_job.py
 
 
-***Exercice3 : ***
+***Exercice3:***
 
 The data is loaded from the src/data/processed/exercice2 folder
 
