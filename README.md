@@ -18,15 +18,15 @@ spark = 2.4.7
 │	├── dependencies/                   Dependencies files (.py) necessary for each spark jobs
 │	├── data/
 │	│   ├── raw/                        Raw Data for exercice 1 and 2
-│	│   ├── processed/                  Processed Data. Storing the result of each exercice
-│	│   │   ├── exercice1
+│	│   ├── processed/                  Processed Data. Storing the result of each exercice  (Create when the jobs run the first time)
+│	│   │   ├── exercice1               
 │	│   │   ├── exercice2
 │	│   │   └── exercice3
 │	└── jobs/                           Contain all the (.py) for the spark jobs
 ├── tests/                              Contain all the (.py) for unit test
 │	└── test_data/                      
 │	    ├── raw/                        Raw Data for exercice 1 and 2
-│	    └── expected/                   Contains the expected result in parquet format for each exercice  
+│	    └── expected/                   Contains the expected result in avro format for each exercice  
 │	        ├── exercice1
 │	        ├── exercice2
 │	        └── exercice3
@@ -86,7 +86,7 @@ The processing of the csv_to_dataframe.csv data induces the following transforma
 
         Casting appropriate data types to the columns that requires it 
 
-The result are stored in **the src/data/processed/exercice1 folder** in parquet format
+The result are stored in **the src/data/processed/exercice1 folder** in avro format
 
 
 
@@ -123,7 +123,7 @@ The Processing of the 02_campagne.parquet data induces the following transformat
 
         Joining all the resulting a dataFrame
 
-The result are stored in **the src/data/processed/exercice2 folder** in parquet format
+The result are stored in **the src/data/processed/exercice2 folder** in avro format
 
 
 -	Lauch **the third exercice** :
@@ -182,7 +182,7 @@ The Preprocessing of the results of the preprocesing induces the following trans
 
         Droping the column used for numbering 
 
-The result are stored in **the src/data/processed/exercice3 folder** in parquet format
+The result are stored in **the src/data/processed/exercice3 folder** in avro format
 
 
 ### Choice Explanations  ###

@@ -38,29 +38,31 @@ def transform_dataframe (input_data):
         JOINING all the resulting in a dataFrames
         
     Parameters : 
-    input_data : spark.DataFrame
 
-    |-- NMPTF: string (nullable = true)
-    |-- 00021_NUMCLIA: string (nullable = true)
-    |-- 00004_NUMCLE: string (nullable = true)
-    |-- 01255_MOISAN: integer (nullable = true)
-    
+        input_data : spark.DataFrame
+
+        |-- NMPTF: string (nullable = true)
+        |-- 00021_NUMCLIA: string (nullable = true)
+        |-- 00004_NUMCLE: string (nullable = true)
+        |-- 01255_MOISAN: integer (nullable = true)
+        
     return :
-    transformed_df_final : spark.DataFrame
 
-    |-- NMPTF: string (nullable = true)
-    |-- TOTAL_CLIENTS: long (nullable = false)
-    |-- TOTAL_CONTRATS: long (nullable = true)
-    |-- ECH_1: long (nullable = true)
-    |-- ECH_2: long (nullable = true)
-    |-- ECH_3: long (nullable = true)
-    |-- ECH_4: long (nullable = true)
-    |-- ECH_6: long (nullable = true)
-    |-- ECH_8: long (nullable = true)
-    |-- ECH_9: long (nullable = true)
-    |-- ECH_10: long (nullable = true)
-    |-- ECH_11: long (nullable = true)
-    |-- ECH_12: long (nullable = true)
+        transformed_df_final : spark.DataFrame
+
+        |-- NMPTF: string (nullable = true)
+        |-- TOTAL_CLIENTS: long (nullable = false)
+        |-- TOTAL_CONTRATS: long (nullable = true)
+        |-- ECH_1: long (nullable = true)
+        |-- ECH_2: long (nullable = true)
+        |-- ECH_3: long (nullable = true)
+        |-- ECH_4: long (nullable = true)
+        |-- ECH_6: long (nullable = true)
+        |-- ECH_8: long (nullable = true)
+        |-- ECH_9: long (nullable = true)
+        |-- ECH_10: long (nullable = true)
+        |-- ECH_11: long (nullable = true)
+        |-- ECH_12: long (nullable = true)
 
     """
     # AGGREGATE the total number of client and contracts
@@ -107,8 +109,7 @@ def main() :
     spark, log, config = spark_env(app_name='count_client_contract_job',
                                     files=['conf/configs.json'])
     spark.conf.set('spark.sql.avro.compression.codec', 'snappy')
-
-        
+    
     exercice="exercice2"
     store_name="Campagne"
 
