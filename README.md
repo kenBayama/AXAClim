@@ -1,7 +1,7 @@
 # AXAClim
 
 
-This Project is a project of processing data of a phone company data.
+This Project is a project of processing phone company data.
 
 
 ### Environnement ###
