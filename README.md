@@ -1,15 +1,8 @@
 # AXAClim
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 This Project is a project of processing phone company data.
-=======
-This Project is a project of processing data of a phone company data.
->>>>>>> cec6e26...  minor modification READ.me
-=======
-This Project is a project of processing phone company data.
->>>>>>> 873d68e...  minor modification READ.me
+
 
 
 ### Environnement ###
