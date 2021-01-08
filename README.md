@@ -2,6 +2,10 @@
 
 
 This Project is a project of processing phone company data.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 419d19dc059adc9d76f53863a90172ae9639b1a5
 
 
 ### Environnement ###
