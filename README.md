@@ -1,12 +1,13 @@
 # AXAClim
 
 
-This Project is a project of a Data Pipeline phone company data.
+This Project is a project of processing phone company data.
 
 
 ### Environnement ###
 
 python = 3.7.9 
+
 spark = 2.4.7
 
 ### Project Structure 
@@ -61,7 +62,7 @@ spark = 2.4.7
             spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip .\src\jobs\csv_to_dataframe_job.py
 
 
-***Execice 1 : *** :
+***Execice1:*** :
 
 The data is loaded from the src/data/raw folder
 
@@ -71,7 +72,7 @@ The data is loaded from the src/data/raw folder
 #### Processing csv_to_dataframe.csv 
 The processing of the csv_to_dataframe.csv data induces the following transformations :
 
-  Transformations : 
+    Transformations : 
 
         Cleaning JSON column data by removing double quote 
             at the beggining and at the end to the string
@@ -95,7 +96,7 @@ The result are stored in **the src/data/processed/exercice1 folder** in avro for
             spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\count_client_contract_job.py
 
 
-***Exercice2 : ***
+***Exercice2:***
 
 The data is loaded from the src/data/raw folder
 
@@ -131,7 +132,7 @@ The result are stored in **the src/data/processed/exercice2 folder** in avro for
             spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\top_client_per_portofolio_job.py
 
 
-***Exercice3 : ***
+***Exercice3:***
 
 The data is loaded from the src/data/processed/exercice2 folder
 
