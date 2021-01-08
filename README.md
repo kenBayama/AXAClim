@@ -2,10 +2,6 @@
 
 
 This Project is a project of processing phone company data.
-<<<<<<< HEAD
-=======
-
->>>>>>> 419d19dc059adc9d76f53863a90172ae9639b1a5
 
 
 ### Environnement ###
@@ -16,10 +12,10 @@ spark = 2.4.7
 
 ### Project Structure 
 ```
-├── src/                                Contain all the source and the sample
-│	├── conf/                           Documentation (.md/.rst files)
-│	|   └── config.json                 Configuration path and file data for the spark job 
-│	├── docs/                           Documentation (.md/.rst files)
+├── src/                                Contain all the source and the raw data
+│	├── conf/                           Configurations path and file data for the spark job 
+│	|   └── config.json                 
+│	├── docs/                           Documentation of the statements of the execices (.md)
 │	├── dependencies/                   Dependencies files (.py) necessary for each spark jobs
 │	├── data/
 │	│   ├── raw/                        Raw Data for exercice 1 and 2
