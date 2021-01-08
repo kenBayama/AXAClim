@@ -1,12 +1,13 @@
 # AXAClim
 
 
-This Project is a project of a Data Pipeline phone company data.
+This Project is a project of processing data of a phone company data.
 
 
 ### Environnement ###
 
 python = 3.7.9 
+
 spark = 2.4.7
 
 ### Project Structure 
