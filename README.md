@@ -72,7 +72,7 @@ The data is loaded from the src/data/raw folder
 #### Processing csv_to_dataframe.csv 
 The processing of the csv_to_dataframe.csv data induces the following transformations :
 
-  Transformations : 
+    Transformations : 
 
         Cleaning JSON column data by removing double quote 
             at the beggining and at the end to the string
