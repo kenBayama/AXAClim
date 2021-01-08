@@ -59,7 +59,7 @@ spark = 2.4.7
 
 -	Lauch **the first exercice** :
 		
-            spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip .\src\jobs\csv_to_dataframe_job.py
+            spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 src/jobs/csv_to_dataframe_job.py
 
 
 ***Execice1:*** :
