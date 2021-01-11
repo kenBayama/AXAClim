@@ -60,12 +60,13 @@ spark = 2.4.7
             
             python -m unittest discover tests
 
--	Lauch **the first exercice** :
-		
-            spark-submit --master local[*] --files src/conf/configs.json --py-files dist/shared-0.0.1-py3.7.egg --packages org.apache.spark:spark-avro_2.11:2.4.7 src/jobs/csv_to_dataframe_job.py
 
 
 ***Execice1:*** :
+
+-	Lauch **the first exercice** :
+		
+            spark-submit --master local[*] --files src/conf/configs.json --py-files dist/shared-0.0.1-py3.7.egg --packages org.apache.spark:spark-avro_2.11:2.4.7 src/jobs/csv_to_dataframe_job.py
 
 The data is loaded from the src/data/raw folder
 
@@ -94,12 +95,13 @@ The result are stored in **the src/data/processed/exercice1 folder** in avro for
 
 
 
+***Exercice2:***
+
 -	Lauch **the second exercice** :
 
             spark-submit --master local[*] --files src/conf/configs.json --py-files dist/shared-0.0.1-py3.7.egg --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\count_client_contract_job.py
 
 
-***Exercice2:***
 
 The data is loaded from the src/data/raw folder
 
@@ -154,12 +156,16 @@ The result are stored in **the src/data/processed/exercice2_alt folder** in avro
 The alternative result is to be used for the exercice 3 because, according to the statements of the exercice 2
 it is not possible to realise what is expected for the execice 3.
 
+
+
+***Exercice3:***
+
 -	Lauch **the third exercice** :
 
             spark-submit --master local[*] --files src/conf/configs.json --py-files dist/shared-0.0.1-py3.7.egg --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\top_client_per_portofolio_job.py
 
 
-***Exercice3:***
+
 
 The data is loaded from the src/data/processed/exercice2 folder
 
