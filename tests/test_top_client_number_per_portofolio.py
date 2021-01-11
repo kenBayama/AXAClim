@@ -4,8 +4,7 @@ import pandas as pd
 
 from tests.test_main import SparkJobTests
 from dependencies.utils import read_data
-from jobs.top_client_per_portofolio_job import (transform_dataframe, 
-                                                mock_input_prep)
+from jobs.top_client_per_portofolio_job import transform_dataframe
 
 
 class top_client_number_per_portofolio_Tests(SparkJobTests):
@@ -21,7 +20,7 @@ class top_client_number_per_portofolio_Tests(SparkJobTests):
 
         # parameter
         self.test_data_path = 'tests/test_data/'
-        self.filename = '/exercice2'
+        self.filename = '/exercice2_alt'
         self.expected_filename = '/exercice3'
         filename_processed = (self.get_path_test(self.test_data_path,
                                                 "expected",
@@ -39,15 +38,17 @@ class top_client_number_per_portofolio_Tests(SparkJobTests):
     
         # transform
         self.logger.warn('transform step : transfoming the data')
-        prep_input_data = mock_input_prep(input_data)
-        data_transformed = transform_dataframe(prep_input_data)
-        
+        data_transformed = transform_dataframe(input_data)
+
+        input_data.show()
+        data_transformed.show()
+        expected_data.show()
 
 
         # assert
         self.logger.warn('assert step :  asserting the result')
-        (self.assertTrue(self.are_dfs_equal(expected_data,
-                                            data_transformed,
+        (self.assertTrue(self.are_dfs_equal(expected_data.sort("NMPTF","TOTAL_CLIENTS"),
+                                            data_transformed.sort("NMPTF","TOTAL_CLIENTS"),
                                             False)))
         
 

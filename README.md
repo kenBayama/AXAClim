@@ -32,7 +32,7 @@ spark = 2.4.7
 │	        ├── exercice2
 │	        └── exercice3
 ├── README.md                           Intro to package
-├── dependencies.zip                    Contains all the dependencies for the spark jobs
+├── setup.py                            package in a .egg file the shared modules stored in the dependencies folder
 └── requirements.txt                    Lists dependencies
 ```
 
@@ -42,24 +42,27 @@ spark = 2.4.7
 -	Install and create a virtual environment :
 
 			pip install virtualenv
-			python3 -m venv datapipeline_env
+			python -m venv datapipeline_env
 			.\datapipeline_env\Scripts\activate
 
 -	Install the required environnment for the project :
 	
 			pip install -r requirements.txt
 
-	
+-	Create the shared modules :	
+            
+            python setup.py bdist_egg
 
 
 -	Lauch **the three unit test** :
     
     From the root repo :
+            
             python -m unittest discover tests
 
 -	Lauch **the first exercice** :
 		
-            spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 src/jobs/csv_to_dataframe_job.py
+            spark-submit --master local[*] --files src/conf/configs.json --py-files dist/shared-0.0.1-py3.7.egg --packages org.apache.spark:spark-avro_2.11:2.4.7 src/jobs/csv_to_dataframe_job.py
 
 
 ***Execice1:*** :
@@ -93,7 +96,7 @@ The result are stored in **the src/data/processed/exercice1 folder** in avro for
 
 -	Lauch **the second exercice** :
 
-            spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\count_client_contract_job.py
+            spark-submit --master local[*] --files src/conf/configs.json --py-files dist/shared-0.0.1-py3.7.egg --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\count_client_contract_job.py
 
 
 ***Exercice2:***
@@ -102,7 +105,7 @@ The data is loaded from the src/data/raw folder
 
 -	The purpose of the exercice is to restructure the company client-contracts portofolio 
     data in order to have for each portofolio the number of contract which arrive 
-    at its term for eachmonth of the coming year
+    at its term for january, february, november and december (1/2/11/12) of the coming year
 
    
 #### Processing 02_campagne.parquet
@@ -120,16 +123,40 @@ The Processing of the 02_campagne.parquet data induces the following transformat
             and store the number of contract per portofolio
             and per terms of contract in newly created columns
 
+        Dropinng the useless columns
+
+        Renaming the newly created columns
+
+        Joining all the resulting a dataFrame
+    
+The result are stored in **the src/data/processed/exercice2 folder** in avro format
+    
+    Transformations (alternative) : 
+
+        Aggregating the total number of client per portofolio and per echeance 
+
+        Aggregating the total number of contracts per portofolio
+
+        Aggregating number of contracts per portofolio and per terms of contracts
+
+        Pivoting the term of contracts for each portofolio
+            and store the number of contract per portofolio
+            and per terms of contract in newly created columns
+
+        Dropinng the useless columns
+
         Renaming the newly created columns
 
         Joining all the resulting a dataFrame
 
-The result are stored in **the src/data/processed/exercice2 folder** in avro format
-
+The result are stored in **the src/data/processed/exercice2_alt folder** in avro format
+    
+The alternative result is to be used for the exercice 3 because, according to the statements of the exercice 2
+it is not possible to realise what is expected for the execice 3.
 
 -	Lauch **the third exercice** :
 
-            spark-submit --master local[*] --files src/conf/configs.json --py-files dependencies.zip --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\top_client_per_portofolio_job.py
+            spark-submit --master local[*] --files src/conf/configs.json --py-files dist/shared-0.0.1-py3.7.egg --packages org.apache.spark:spark-avro_2.11:2.4.7 .\src\jobs\top_client_per_portofolio_job.py
 
 
 ***Exercice3:***
@@ -139,36 +166,7 @@ The data is loaded from the src/data/processed/exercice2 folder
 -	The purpose of the exercice is to filter the data to keep for each category of portofolio the top three elements
     with the greater number of clients :
 
-In two steps.
-
-Step 1 : 
--	Preprocessing the data fron exercice2 result in order to make the usable for the exercice3 question
-    According to my understanding of the exercice2, I couldn't produce the data necessary to answer the exercice3 question.
-    I modified the result of the exercice2 in order to be able to do so 
-
-Step 2 :
--	 Processing the data to obtain the desired results
-
-#### Step 1 : Preprocessiong src/data/processed/exercice2
-
-The Preprocessing of the src/data/processed/exercice2 parquet data induces the following transformations  :
-
-    Transformations : 
-
-        Creating an UDF that creat an array of int 
-            based on the data from an other column
-
-        Creating a column N on which the udf n_to_array is applied
-
-        Exploding the data in the n column and stored it in the MOCK column
-            The rows are duplicated
-
-        Multiplying the number of client  by an ascending value of integer 
-
-        Droping the MOCK and N column  
-
-#### Step 2 : Processing the result of the preprocessing phase
-
+#### Processing the result of the preprocessing phase
 The Preprocessing of the results of the preprocesing induces the following transformations  :
 
     Transformations : 

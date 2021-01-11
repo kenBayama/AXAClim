@@ -178,11 +178,8 @@ def main() :
     # execute ETL pipeline
     input_data = read_data(spark,path,"avro")
 
-    #preprocessing phase
-    prep_input_data = mock_input_prep (input_data)
-
-    #processing phase
-    data_transformed = transform_dataframe(prep_input_data)
+    # processing phase
+    data_transformed = transform_dataframe(input_data)
     load_data(data_transformed, config, exercice,"avro")
 
 

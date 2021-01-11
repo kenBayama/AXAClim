@@ -37,7 +37,7 @@ def read_data (spark, path, format):
 
 
 def load_data (input_data, config, exercice, format):
-    
+
     """
     this function allow you to read data from a spark.dataFrame
     and load those data in a parquet or an avro file based on the 
@@ -70,29 +70,27 @@ def load_data (input_data, config, exercice, format):
 
 
 
-def read_parquet_and_createStore (spark, path, name_store, usefull_col) :
+def read_parquet_and_select (spark, path, usefull_col) :
 
     """
     this function allow you to read data from parquet files,
-    store a memory reference of the read spark.dataFrame
-    and return a subset of this spark.dataFrame 
+    return a subset of this spark.dataFrame 
     based on the usefull_col parameter 
 
     Parameters :
-        input_data : spark.DataFrame 
+        spark : spark : spark.SparkSession
         path : str
-        name_store : str
         usefull_col : str
 
 
     return :
-        None
+        input_data
 
     """
 
-    input_data = ( 
-        spark.read.format("parquet")
-        .load(path)
-        .createOrReplaceTempView(name_store))
 
-    return spark.sql(f"select {usefull_col} from {name_store}")
+
+    input_data = spark.read.parquet(path).select(*usefull_col)
+        
+
+    return input_data

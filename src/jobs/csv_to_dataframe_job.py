@@ -60,56 +60,32 @@ def transform_dataframe (input_data):
 
     """
 
-    # CLEAN JSON column data
-    transformed_df1 = ( 
-        input_data.withColumn("JSON", regexp_replace(input_data["JSON"],
-                                                    "^\"+|\"+$","") ))
-
-    # EXPLODE the JSON column into two distinct guid and poi column
-    transformed_df2 = ( 
-        transformed_df1.withColumn("JSON", from_json(transformed_df1["JSON"],
-                                                    schema_json))
-                        .select("*",col("JSON.*"))
-                        .drop("JSON"))
-    # CLEAN columns
-    transformed_df3 = ( 
-        transformed_df2.withColumn("CLI_COEFF", 
-                                    regexp_replace(input_data["CLI_COEFF"], 
-                                                    ",",".")))
-    transformed_df4 = ( 
-        transformed_df3.withColumn("CLI_TEL", 
-                                    regexp_replace(transformed_df3["CLI_TEL"],
-                                                    "[/.]","")))
-
+    # CLEAN JSON column data   
+    # EXPLODE the JSON column into two distinct guid and poi column 
+    # CLEAN columns  
     # CAST data types 
-    transformed_df5 = ( 
-        transformed_df4.withColumn("CLI_COEFF", 
-                                    transformed_df4["CLI_COEFF"]
-                                        .cast("double")))
-    transformed_df6 = (
-        transformed_df5.withColumn("DATE_NAISS", 
-                                    to_timestamp(transformed_df5["DATE_NAISS"], 
-                                                'dd/MM/yyyy')))
-    transformed_df7 = ( 
-        transformed_df6.withColumn("DATE_LAST_SOUS", 
-                                    to_timestamp(transformed_df6["DATE_LAST_SOUS"], 
-                                                'yyyy-MM-dd HH:mm:ss')))
-    transformed_df8 = ( 
-        transformed_df7.withColumn("DATE_LAST_RESIL", 
-                                    to_timestamp(transformed_df7["DATE_LAST_RESIL"], 
-                                                'yyyy-MM-dd HH:mm:ss')))                                               
-    transformed_df9 = ( 
-        transformed_df8.withColumn("AGENT_ID1",  
-                                    transformed_df8["AGENT_ID1"].cast("long")))
-    transformed_df10 = ( 
-        transformed_df9.withColumn("AGENT_ID2", 
-                                    transformed_df9["AGENT_ID2"].cast("long")))
-    transformed_df11 = (
-        transformed_df10.withColumn("CDREGAXA", 
-                                    transformed_df10["CDREGAXA"].cast("int")))
+
     transformed_df_final = ( 
-        transformed_df11.withColumn("ANCCLI", 
-                                    transformed_df11["ANCCLI"].cast("int")))      
+        input_data
+            .withColumn("JSON", regexp_replace(col("JSON"), "^\"+|\"+$",""))
+            .withColumn("JSON", from_json(col("JSON"),schema_json))
+            .select("*",col("JSON.*"))
+            .drop("JSON")
+
+            .withColumn("CLI_COEFF", regexp_replace(col("CLI_COEFF"), ",","."))
+            .withColumn("CLI_TEL", regexp_replace(col("CLI_TEL"), "[/.]",""))
+
+            .withColumn("CLI_COEFF", col("CLI_COEFF").cast("float"))
+            .withColumn("DATE_NAISS", to_timestamp(col("DATE_NAISS"), 
+                                                'dd/MM/yyyy'))                               
+            .withColumn("DATE_LAST_SOUS", to_timestamp(col("DATE_LAST_SOUS"), 
+                                                'yyyy-MM-dd HH:mm:ss'))
+            .withColumn("DATE_LAST_RESIL", to_timestamp(col("DATE_LAST_RESIL"), 
+                                                'yyyy-MM-dd HH:mm:ss'))
+            .withColumn("AGENT_ID1", col("AGENT_ID1").cast("long"))
+            .withColumn("AGENT_ID2", col("AGENT_ID2").cast("long"))
+            .withColumn("CDREGAXA", col("CDREGAXA").cast("int"))
+            .withColumn("ANCCLI", col("ANCCLI").cast("int")))      
 
 
     return transformed_df_final
