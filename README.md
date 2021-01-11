@@ -41,13 +41,13 @@ spark = 2.4.7
 
 -	Install and create a virtual environment :
 
-			pip install virtualenv
-			python -m venv datapipeline_env
-			.\datapipeline_env\Scripts\activate
+            pip install virtualenv
+            python -m venv datapipeline_env
+            .\datapipeline_env\Scripts\activate
 
 -	Install the required environnment for the project :
-	
-			pip install -r requirements.txt
+            
+            pip install -r requirements.txt
 
 -	Create the shared modules :	
             
